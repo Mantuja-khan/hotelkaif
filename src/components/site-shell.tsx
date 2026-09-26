@@ -52,13 +52,11 @@ import madhubhanLogo from "@/assets/madhubhan-logo.png";
 export function Brand({ className = "" }: { className?: string }) {
   return (
     <Link to="/" className={`brand ${className}`} aria-label="Madhubhan Resort and Spa home">
-      <div className="bg-white/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-sm shadow-sm hover:bg-white transition-all flex items-center">
-        <img
-          src={madhubhanLogo}
-          alt="Madhubhan Resort & Spa"
-          className="h-9 sm:h-11 md:h-12 w-auto object-contain"
-        />
-      </div>
+      <img
+        src={madhubhanLogo}
+        alt="Madhubhan Resort & Spa"
+        className="h-12 sm:h-14 md:h-16 lg:h-[4.4rem] w-auto object-contain transition-transform"
+      />
     </Link>
   );
 }
@@ -70,6 +68,34 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
+      <style>{`
+        @keyframes book-now-blink-glow {
+          0%, 100% {
+            background: #a37c4c !important;
+            color: #ffffff !important;
+            border-color: #d4af37 !important;
+            box-shadow: 0 0 0 0 rgba(163, 124, 76, 0.7), 0 0 12px rgba(163, 124, 76, 0.5) !important;
+            transform: scale(1);
+          }
+          50% {
+            background: #ffffff !important;
+            color: #1e1b18 !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 0 0 6px rgba(163, 124, 76, 0), 0 0 20px rgba(255, 255, 255, 0.9) !important;
+            transform: scale(1.05);
+          }
+        }
+        .book-now-blink {
+          animation: book-now-blink-glow 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.14em !important;
+          text-transform: uppercase !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          cursor: pointer !important;
+        }
+      `}</style>
       <Brand />
 
       <nav className="desktop-nav" aria-label="Main navigation">
@@ -146,8 +172,8 @@ export function SiteHeader() {
         </Link>
       </nav>
 
-      <Button asChild variant="outline" className="header-cta">
-        <Link to="/contact">Get in touch</Link>
+      <Button asChild variant="outline" className="header-cta book-now-blink">
+        <Link to="/contact">BOOK NOW</Link>
       </Button>
 
       <Button
@@ -206,6 +232,13 @@ export function SiteHeader() {
           </div>
 
           <Link to="/contact" onClick={() => setOpen(false)}>Contact <ArrowUpRight /></Link>
+          <Link
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className="gold-button book-now-blink text-center mt-4 py-3 !text-sm !font-bold"
+          >
+            BOOK NOW <ArrowUpRight className="inline-block ml-1 w-4 h-4" />
+          </Link>
         </nav>
       )}
     </header>
@@ -219,31 +252,38 @@ export function SiteFooter() {
         {/* Column 1: Get in touch & Brand */}
         <div className="flex flex-col">
           <Link to="/" className="inline-block mb-4 w-fit" aria-label="Madhubhan Resort and Spa home">
-            <div className="bg-white/95 px-3 py-1.5 rounded-sm shadow-md inline-block">
-              <img
-                src={madhubhanLogo}
-                alt="Madhubhan Resort & Spa"
-                className="h-10 sm:h-11 w-auto object-contain"
-              />
-            </div>
+            <img
+              src={madhubhanLogo}
+              alt="Madhubhan Resort & Spa"
+              className="h-11 sm:h-13 w-auto object-contain"
+            />
           </Link>
           <p className="font-medium text-sm text-[#ffffff] mb-1">
             Madhubhan Resort &amp; Spa
           </p>
-          <p className="text-xs text-[#c2d3cb] leading-relaxed mb-4">
+          <p className="text-xs text-[#c2d3cb] leading-relaxed mb-3">
             Anand - Sojitra Road
             <br />
             Vallabh Vidyanagar - 388 120
             <br />
             Gujarat, India.
           </p>
-          <div className="mb-6">
-            <a
-              href="mailto:reservations@madhubhan.com"
-              className="text-xs text-[#ffffff] underline underline-offset-4 hover:text-[#d4af37] transition-colors"
-            >
-              reservations@madhubhan.com
-            </a>
+          <div className="space-y-1.5 mb-6">
+            <p className="text-xs text-[#c2d3cb] flex items-center gap-2">
+              <Phone className="w-3.5 h-3.5 text-[#a37c4c]" />
+              <a href="tel:9828995481" className="hover:text-white transition-colors font-medium">
+                +91 98289 95481
+              </a>
+            </p>
+            <p className="text-xs text-[#c2d3cb] flex items-center gap-2">
+              <Mail className="w-3.5 h-3.5 text-[#a37c4c]" />
+              <a
+                href="mailto:reservations@madhubhan.com"
+                className="underline underline-offset-4 hover:text-[#d4af37] transition-colors"
+              >
+                reservations@madhubhan.com
+              </a>
+            </p>
           </div>
           {/* Social circular icons */}
           <div className="flex items-center gap-3 mt-auto">

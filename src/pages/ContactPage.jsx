@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/arcova";
-import hero from "@/assets/project-aurora.jpg";
+import hero from "@/assets/contact-reception-hero.png";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -36,13 +36,13 @@ export default function ContactPage() {
           </p>
           <div>
             <p>
-              <Mail /> reservations@madhubhan.com
+              <Mail /> <a href="mailto:reservations@madhubhan.com" className="hover:text-primary transition-colors">reservations@madhubhan.com</a>
             </p>
             <p>
-              <Phone /> +91 2692 239 268
+              <Phone /> <a href="tel:9828995481" className="hover:text-primary transition-colors">+91 98289 95481</a>
             </p>
             <p>
-              <MapPin /> Anand–Sojitra Road, Gujarat, India
+              <MapPin /> Anand–Sojitra Road, Vallabh Vidyanagar, Gujarat, India
             </p>
           </div>
         </div>

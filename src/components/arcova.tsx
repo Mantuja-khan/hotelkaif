@@ -553,6 +553,154 @@ export function HomePage() {
 
   return (
     <>
+      <style>{`
+        .home-hero {
+          position: relative;
+          color: #f7f6f2;
+          overflow: hidden;
+          background: #1e1b18;
+          height: min(52rem, 92vh);
+          min-height: 43rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-slides {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: 1;
+          pointer-events: none;
+        }
+        .hero-slide {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: opacity;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        .hero-slide.active {
+          opacity: 1;
+          visibility: visible;
+          z-index: 2;
+        }
+        .hero-slide-img {
+          position: absolute;
+          inset: 0;
+          width: 100% !important;
+          height: 100% !important;
+          max-width: none !important;
+          max-height: none !important;
+          object-fit: cover;
+          transform-origin: center center;
+          will-change: transform;
+          transform: scale(1.0) translate3d(0, 0, 0);
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+        .hero-slide.active .hero-slide-img {
+          animation: hero-cinematic-zoom-in 7.5s linear forwards !important;
+        }
+        @keyframes hero-cinematic-zoom-in {
+          0% {
+            transform: scale(1.0) translate3d(0, 0, 0);
+          }
+          100% {
+            transform: scale(1.28) translate3d(0, 0, 0);
+          }
+        }
+        .hero-shade {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.04) 40%, rgba(0, 0, 0, 0.40) 100%);
+          pointer-events: none;
+        }
+        .hero-copy {
+          position: relative;
+          z-index: 3;
+          text-align: center;
+          max-width: 52rem;
+          width: min(92%, 52rem);
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-copy h1 {
+          font-size: clamp(2.4rem, 5.5vw, 5.5rem);
+          line-height: 1.05;
+          letter-spacing: 0;
+          text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+        .hero-copy p {
+          text-align: center;
+        }
+        .hero-slide-nav {
+          position: absolute;
+          z-index: 4;
+          bottom: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+        }
+        @media (max-width: 1080px) {
+          .home-hero {
+            height: 45rem;
+            min-height: 0;
+          }
+          .hero-copy {
+            width: min(92%, 52rem);
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+          .hero-copy h1 {
+            font-size: clamp(2.2rem, 6.5vw, 3.5rem);
+            text-align: center;
+          }
+        }
+        @media (max-width: 560px) {
+          .home-hero {
+            height: 42rem;
+            padding: 0 1rem;
+          }
+          .hero-copy {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+          .hero-copy h1 {
+            font-size: clamp(2rem, 8.5vw, 2.8rem);
+            text-align: center;
+          }
+          .hero-slide-nav {
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 1.4rem;
+            gap: 0.6rem;
+          }
+        }
+      `}</style>
       <section
         className="home-hero"
         onTouchStart={handleTouchStart}
