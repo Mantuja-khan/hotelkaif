@@ -1,65 +1,166 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  MoveUpRight,
+  Compass,
   Award,
   Building2,
-  Compass,
   DraftingCompass,
   Home,
-  MoveUpRight,
-  Users,
 } from "lucide-react";
-import hero from "@/assets/madhubhan-resort-hero.jpg";
-import horizon from "@/assets/project-horizon.jpg";
-import aurora from "@/assets/project-aurora.jpg";
+import heroEntrance from "@/assets/madhubhan-hero-entrance.jpg";
+import heroPool from "@/assets/madhubhan-hero-pool.jpg";
+import heroFacade from "@/assets/madhubhan-hero-facade.jpg";
+import heroILove from "@/assets/madhubhan-hero-ilove.jpg";
+import hero from "@/assets/madhubhan-hero-entrance.jpg";
 import edgewood from "@/assets/project-edgewood.jpg";
-import maple from "@/assets/project-maple.jpg";
 import interior from "@/assets/interior-living.jpg";
 import spa from "@/assets/madhubhan-spa.jpg";
 import suite from "@/assets/madhubhan-suite.jpg";
 import dining from "@/assets/madhubhan-dining.jpg";
 
+// Room assets
+import sig1 from "@/assets/signature-suite-slider-1.webp";
+import deluxe1 from "@/assets/deluxe_room1.webp";
+import deluxePrem1 from "@/assets/deluxe__premium_room1.webp";
+import mandavdi1 from "@/assets/mandavandi_gom_cottages1.webp";
+import zamkudi1 from "@/assets/zamkudi-gom-cottage-1.webp";
+import mandavdiDeluxe1 from "@/assets/mandavdi-gom-deluxe-cottage-1.webp";
+import exec1 from "@/assets/executive-suite-slider-1.webp";
+import zanz1 from "@/assets/zanzaryu-suite-1.webp";
+import zula1 from "@/assets/zulaniya-bridal-suite-1.webp";
+import pres1 from "@/assets/presidential-suite-1.webp";
+
+// Blog assets
+import blogPetFriendly from "@/assets/blog-pet-friendly.jpg";
+import blogSpaResort from "@/assets/blog-spa-resort.jpg";
+import blogWeddingPlanner from "@/assets/blog-wedding-planner.jpg";
+
+// Unforgettable Moments assets
+import unforgettableSpa from "@/assets/unforgettable-spa.jpg";
+import unforgettableCelebrations from "@/assets/unforgettable-celebrations.jpg";
+
 export const heroSlides = [
   {
-    image: hero,
+    image: heroEntrance,
     title: "Palace Arrival",
     subtitle: "A world of timeless hospitality",
-    alt: "Madhubhan Resort and Spa grand palace entrance at golden hour",
+    alt: "Madhubhan Resort grand palace entrance at twilight",
   },
   {
-    image: suite,
-    title: "Heritage Suites",
-    subtitle: "Sanctuaries of quiet elegance",
-    alt: "Luxurious heritage suites and private retreats",
+    image: heroPool,
+    title: "Azure Lagoon",
+    subtitle: "Gujarat's longest luxury meandering pool",
+    alt: "Tranquil blue swimming pool surrounded by lush tropical palms",
   },
   {
-    image: spa,
-    title: "Spa Sanctuary",
-    subtitle: "Restorative wellness & mindful rituals",
-    alt: "Tranquil spa sanctuary and wellness pavilion",
+    image: heroFacade,
+    title: "Heritage Living",
+    subtitle: "Sanctuaries of quiet elegance and culture",
+    alt: "Magnificent Madhubhan resort architecture and manicured garden lawns",
   },
   {
-    image: dining,
-    title: "Moonlit Dining",
-    subtitle: "Soulful culinary creations",
-    alt: "Atmospheric moonlit dining by the poolside",
-  },
-  {
-    image: interior,
-    title: "Resort Living",
-    subtitle: "Lush gardens and timeless comfort",
-    alt: "Serene living spaces and lush courtyards",
+    image: heroILove,
+    title: "Memories to Treasure",
+    subtitle: "Moments made extraordinary across 22 acres",
+    alt: "Iconic illuminated Madhubhan pool lagoon and garden setting",
   },
 ];
 
-export const projects = [
-  { name: "The Palace Arrival", location: "Madhubhan Resort", image: hero, shape: "tall" },
-  { name: "Heritage Suites", location: "Garden Wing", image: suite, shape: "wide" },
-  { name: "The Spa Sanctuary", location: "Wellness Pavilion", image: spa, shape: "wide" },
-  { name: "Moonlit Dining", location: "Poolside Terrace", image: dining, shape: "tall" },
-  { name: "Tropical Courtyards", location: "Resort Gardens", image: edgewood, shape: "wide" },
-  { name: "Private Retreats", location: "Villa Collection", image: interior, shape: "wide" },
+export const homeRooms = [
+  {
+    id: 1,
+    name: "Signature Suite",
+    area: "1,399 sq. ft",
+    image: sig1,
+  },
+  {
+    id: 2,
+    name: "Deluxe Rooms",
+    area: "355 sq. ft",
+    image: deluxe1,
+  },
+  {
+    id: 3,
+    name: "Deluxe Premium Rooms",
+    area: "355 sq. ft",
+    image: deluxePrem1,
+  },
+  {
+    id: 4,
+    name: "Mandavdi Gom Cottages",
+    area: "452 sq. ft",
+    image: mandavdi1,
+  },
+  {
+    id: 5,
+    name: "Zamkudi Gom Cottages",
+    area: "398 sq. ft",
+    image: zamkudi1,
+  },
+  {
+    id: 6,
+    name: "Mandavdi Gom Deluxe Cottages",
+    area: "538 sq. ft",
+    image: mandavdiDeluxe1,
+  },
+  {
+    id: 7,
+    name: "Executive Suite",
+    area: "700 sq. ft",
+    image: exec1,
+  },
+  {
+    id: 8,
+    name: "Zanzariyu – The Deluxe Suite",
+    area: "915 sq. ft",
+    image: zanz1,
+  },
+  {
+    id: 9,
+    name: "Zulaniya – The Bridal Suite",
+    area: "990 sq. ft",
+    image: zula1,
+  },
+  {
+    id: 10,
+    name: "Madhubhan – Presidential Suite",
+    area: "1,400 sq. ft",
+    image: pres1,
+  },
+];
+
+export const homeBlogs = [
+  {
+    id: 1,
+    title: "Pet-Friendly Resort",
+    desc: "Hello, Pet Parents! Planning a getaway, but don't want to leave your furry companion behind? We hear you.",
+    image: blogPetFriendly,
+    link: "/insights",
+  },
+  {
+    id: 2,
+    title: "Best Spa Resort",
+    desc: "When it comes to ultimate relaxation, luxurious body massages, and world-class spa experiences, Madhubhan Resort &...",
+    image: blogSpaResort,
+    link: "/insights",
+  },
+  {
+    id: 3,
+    title: "Destination Wedding Planner",
+    desc: "Destination Wedding planning can feel overwhelming - but it doesn't have to be! With the right approach, expert...",
+    image: blogWeddingPlanner,
+    link: "/insights",
+  },
+];
+
+export const insights = [
+  { date: "May 13, 2026", title: "Pet-Friendly Resort Living", image: blogPetFriendly },
+  { date: "Apr 26, 2026", title: "Best Spa Resort & Holistic Healing", image: blogSpaResort },
+  { date: "Apr 10, 2026", title: "Destination Wedding Planner Guide", image: blogWeddingPlanner },
 ];
 
 export const services = [
@@ -70,10 +171,13 @@ export const services = [
   { title: "Curated Escapes", icon: DraftingCompass, text: "Thoughtful experiences for couples, families, and friends." },
 ];
 
-export const insights = [
-  { date: "May 13, 2026", title: "A Slower Rhythm of Wellness", image: spa },
-  { date: "Apr 26, 2026", title: "The Art of a Memorable Stay", image: suite },
-  { date: "Apr 10, 2026", title: "Flavours Beneath the Evening Sky", image: dining },
+export const projects = [
+  { name: "The Palace Arrival", location: "Madhubhan Resort", image: hero, shape: "tall" },
+  { name: "Heritage Suites", location: "Garden Wing", image: suite, shape: "wide" },
+  { name: "The Spa Sanctuary", location: "Wellness Pavilion", image: spa, shape: "wide" },
+  { name: "Moonlit Dining", location: "Poolside Terrace", image: dining, shape: "tall" },
+  { name: "Tropical Courtyards", location: "Resort Gardens", image: edgewood, shape: "wide" },
+  { name: "Private Retreats", location: "Villa Collection", image: interior, shape: "wide" },
 ];
 
 export function ArrowLink({ to, children, light = false }) {
@@ -107,27 +211,294 @@ export function PageHero({ eyebrow, title, text, image = hero }) {
   );
 }
 
+export function HomeRoomsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevIndex = (currentIndex - 1 + homeRooms.length) % homeRooms.length;
+  const nextIndex = (currentIndex + 1) % homeRooms.length;
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + homeRooms.length) % homeRooms.length);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % homeRooms.length);
+  };
+
+  const currentRoom = homeRooms[currentIndex];
+  const prevRoom = homeRooms[prevIndex];
+  const nextRoom = homeRooms[nextIndex];
+
+  return (
+    <section className="home-rooms-showcase">
+      <div className="home-section-header">
+        <p className="home-section-eyebrow">Discover</p>
+        <h2 className="home-section-title">
+          Rooms <em>&amp;</em> Suites
+        </h2>
+        <p className="home-section-sub">Reserve the room you prefer.</p>
+      </div>
+
+      {/* Panoramic Slider Track */}
+      <div className="relative w-full select-none pb-6 md:pb-8">
+        <div className="flex items-center justify-center gap-3 md:gap-6 px-3 md:px-6 max-w-[1440px] mx-auto min-h-[340px] md:min-h-[480px]">
+          {/* Left / Previous Slide Peek */}
+          <div
+            onClick={handlePrev}
+            className="hidden md:block w-1/4 h-[300px] md:h-[420px] shrink-0 opacity-45 hover:opacity-75 transition-opacity cursor-pointer overflow-hidden shadow-md"
+          >
+            <img
+              src={prevRoom.image}
+              alt={prevRoom.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Center / Active Slide with Floating View Card */}
+          <div className="relative w-full md:w-1/2 h-[340px] md:h-[460px] shrink-0 shadow-2xl overflow-visible">
+            <div className="w-full h-full overflow-hidden">
+              <img
+                src={currentRoom.image}
+                alt={currentRoom.name}
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
+
+            {/* Left & Right Nav Arrows inside Active Slide */}
+            <button
+              onClick={handlePrev}
+              type="button"
+              aria-label="Previous room"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/45 hover:bg-black/75 text-white flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={handleNext}
+              type="button"
+              aria-label="Next room"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/45 hover:bg-black/75 text-white flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Floating Room Info Card (Matching Image 1) */}
+            <div className="absolute -bottom-4 md:-bottom-5 left-1/2 -translate-x-1/2 z-30 w-[94%] max-w-[480px]">
+              <div className="bg-white text-stone-900 shadow-xl px-5 sm:px-7 py-3.5 sm:py-4.5 flex items-center justify-between gap-3 sm:gap-4 border border-stone-200/70">
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-serif text-[1.45rem] sm:text-[1.75rem] text-[#1a1a1a] font-normal leading-tight">
+                    {currentRoom.name}
+                  </h3>
+                  <p className="text-[13px] text-[#78716c] mt-1 font-sans tracking-wide">
+                    Area: {currentRoom.area}
+                  </p>
+                </div>
+                <Link
+                  to="/accommodation"
+                  className="bg-[#a37c4c] hover:bg-[#8b6537] text-white px-5 sm:px-7 py-2.5 sm:py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all shrink-0 inline-flex items-center justify-center shadow-xs"
+                >
+                  VIEW
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Right / Next Slide Peek */}
+          <div
+            onClick={handleNext}
+            className="hidden md:block w-1/4 h-[300px] md:h-[420px] shrink-0 opacity-45 hover:opacity-75 transition-opacity cursor-pointer overflow-hidden shadow-md"
+          >
+            <img
+              src={nextRoom.image}
+              alt={nextRoom.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Pagination Dots (Matching Image 1: ○○○○●○○○○○) */}
+        <div className="flex items-center justify-center gap-2 mt-8 md:mt-10">
+          {homeRooms.map((room, idx) => {
+            const isActive = idx === currentIndex;
+            return (
+              <button
+                key={room.id}
+                type="button"
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}: ${room.name}`}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  isActive
+                    ? "w-2.5 h-2.5 bg-[#a37c4c] ring-2 ring-[#a37c4c]/40 ring-offset-1"
+                    : "w-2 h-2 border border-stone-400 bg-transparent hover:border-[#a37c4c]"
+                }`}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HomeUnforgettableMoments() {
+  const moments = [
+    {
+      title: "Experiences",
+      image: edgewood,
+      to: "/experience",
+      alt: "Lush tropical courtyards and experiences at Madhubhan Resort",
+    },
+    {
+      title: "Spa & Wellness",
+      image: unforgettableSpa,
+      to: "/spa-wellness",
+      alt: "Serene meditation and restorative wellness sanctuary",
+    },
+    {
+      title: "Celebrations",
+      image: unforgettableCelebrations,
+      to: "/wedding",
+      alt: "Luxury banquet celebrations and romantic dining",
+    },
+  ];
+
+  return (
+    <section className="bg-[#fbf9f5] py-20 px-4 sm:px-6 lg:px-8 border-t border-stone-200/70">
+      <div className="max-w-[1380px] mx-auto">
+        {/* Section Header (Matching Image 2) */}
+        <div className="mb-12">
+          <p className="home-section-eyebrow">We Offer</p>
+          <h2 className="home-section-title">Unforgettable Moments</h2>
+          <p className="home-section-sub max-w-3xl">
+            At Madhubhan, every sunrise brings serenity, every spa touch brings renewal, and every celebration becomes a memory.
+          </p>
+        </div>
+
+        {/* 3 Full-Card Grid (Matching Image 2) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {moments.map((item) => (
+            <Link
+              key={item.title}
+              to={item.to}
+              className="group relative h-[380px] sm:h-[420px] md:h-[480px] overflow-hidden shadow-lg block select-none"
+            >
+              <img
+                src={item.image}
+                alt={item.alt}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Bottom Dark Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-6 sm:p-8">
+                <h3 className="font-serif text-2xl sm:text-[1.85rem] text-white font-normal leading-tight group-hover:text-[#e8d5b5] transition-colors">
+                  {item.title}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HomeBlogsSection() {
+  return (
+    <section className="home-blogs-showcase">
+      <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header (Matching Image 2) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-stone-200/80">
+          <div>
+            <p className="home-section-eyebrow">Explore</p>
+            <h2 className="home-section-title">Blogs</h2>
+            <p className="home-section-sub">
+              Unwind with curated reads on luxury, lifestyle, and the Madhubhan way of living.
+            </p>
+          </div>
+          <div>
+            <Link
+              to="/insights"
+              className="inline-flex items-center justify-center bg-[#a37c4c] hover:bg-[#8b6537] text-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all shadow-sm"
+            >
+              VIEW ALL
+            </Link>
+          </div>
+        </div>
+
+        {/* 3 Blog Cards Grid (Matching Image 2) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {homeBlogs.map((blog) => (
+            <article key={blog.id} className="home-blog-card group">
+              <Link to={blog.link} className="home-blog-card-img-wrap block">
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="home-blog-card-img"
+                  loading="lazy"
+                />
+              </Link>
+              <div className="home-blog-card-body">
+                <div>
+                  <h3 className="home-blog-card-title">
+                    <Link to={blog.link} className="hover:text-[#a37c4c] transition-colors">
+                      {blog.title}
+                    </Link>
+                  </h3>
+                  <p className="home-blog-card-desc">{blog.desc}</p>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    to={blog.link}
+                    aria-label={`Read more about ${blog.title}`}
+                    className="home-blog-arrow-btn"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 7500);
     return () => clearInterval(timer);
-  }, []);
+  }, [currentSlide]);
 
-  const steps = [
-    ["01", "Arrive", "A warm welcome and effortless check-in begin your escape."],
-    ["02", "Unwind", "Settle into spaces designed for comfort and calm."],
-    ["03", "Indulge", "Discover soulful dining and restorative spa rituals."],
-    ["04", "Explore", "Enjoy gardens, pools, culture, and curated experiences."],
-    ["05", "Remember", "Leave with moments that stay with you long after."],
-  ];
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (diff > 45) {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    } else if (diff < -45) {
+      setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    }
+    touchStartX.current = null;
+  };
 
   return (
     <>
-      <section className="home-hero">
+      <section
+        className="home-hero"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="hero-slides">
           {heroSlides.map((slide, index) => {
             const isActive = index === currentSlide;
@@ -138,7 +509,6 @@ export function HomePage() {
                 aria-hidden={!isActive}
               >
                 <img
-                  key={isActive ? `hero-active-${index}` : `hero-idle-${index}`}
                   src={slide.image}
                   alt={slide.alt}
                   className="hero-slide-img"
@@ -193,29 +563,10 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="stats">
-        <div>
-          <Award />
-          <strong>5★</strong>
-          <span>Luxury Hospitality</span>
-        </div>
-        <div>
-          <Building2 />
-          <strong>22</strong>
-          <span>Acres of Tranquility</span>
-        </div>
-        <div>
-          <Users />
-          <strong>98%</strong>
-          <span>Guest Satisfaction</span>
-        </div>
-        <div>
-          <Award />
-          <strong>20+</strong>
-          <span>Curated Experiences</span>
-        </div>
-      </section>
+      {/* 1. Rooms & Suites Showcase Section (Image 1) */}
+      <HomeRoomsSection />
 
+      {/* Discover Madhubhan Spaces */}
       <section className="section projects-home">
         <div className="section-intro">
           <p className="eyebrow">Discover Madhubhan</p>
@@ -258,79 +609,11 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="services-band">
-        <div className="services-title">
-          <p className="eyebrow">Your stay, elevated</p>
-          <h2>
-            Meaningful
-            <br />
-            <em>Experiences</em>
-          </h2>
-          <p>
-            Every detail is considered, from the welcome at our doors to the
-            moments you carry home.
-          </p>
-          <ArrowLink to="/services" light>
-            Explore experiences
-          </ArrowLink>
-        </div>
-        {services.map(({ title, icon: Icon, text }) => (
-          <article className="service-card" key={title}>
-            <Icon />
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </section>
+      {/* 2. Unforgettable Moments Section (Image 2) - replaces Meaningful Experiences and Come Away Renewed */}
+      <HomeUnforgettableMoments />
 
-      <section className="process section">
-        <div className="section-intro">
-          <p className="eyebrow">Your journey</p>
-          <h2>
-            Come Away
-            <br />
-            Completely Renewed
-          </h2>
-          <ArrowLink to="/services">Plan your stay</ArrowLink>
-        </div>
-        <div className="steps">
-          {steps.map(([n, t, d]) => (
-            <article key={n}>
-              <span>{n}</span>
-              <h3>{t}</h3>
-              <p>{d}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="insights-band">
-        <div className="section-intro">
-          <p className="eyebrow">Insights</p>
-          <h2>
-            Ideas. Trends.
-            <br />
-            <em>Inspiration.</em>
-          </h2>
-          <ArrowLink to="/insights" light>
-            View all articles
-          </ArrowLink>
-        </div>
-        <div className="insight-grid">
-          {insights.map((a) => (
-            <article key={a.title}>
-              <img src={a.image} alt="" loading="lazy" width={1200} height={900} />
-              <div>
-                <small>{a.date}</small>
-                <h3>{a.title}</h3>
-                <Link to="/insights">
-                  Read more <ArrowRight />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {/* 3. Blogs Section (Image 2) */}
+      <HomeBlogsSection />
     </>
   );
 }
