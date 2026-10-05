@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles, Heart, Sun, Droplets, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Sparkles, Heart, Sun, Droplets, CheckCircle2, Phone } from "lucide-react";
 import { PageHero } from "@/components/arcova";
 import spaHeroImg from "@/assets/madhubhan-wellness-hero.png";
 import salonImg from "@/assets/sallon.webp";
@@ -75,9 +75,18 @@ export default function SpaWellnessPage() {
             <p className="spa-salon-card-desc">
               Dedicated to your good looks, the Signature Salon at Madhubhan Resort and Spa is one beauty salon even the most protective of their beauty secrets can't keep to themselves. The Signature Salon is a unisex salon which offers haircuts, hair wash, blow drying, hair styling, colouring, protein and hair fall treatments along with deep conditioning and Hair Spa Treatments.
             </p>
-            <Link to="/contact" className="spa-salon-view-btn">
-              VIEW
-            </Link>
+            <div className="flex items-center gap-3 pt-2">
+              <Link to="/contact" className="spa-salon-view-btn">
+                VIEW
+              </Link>
+              <a
+                href="tel:9828885481"
+                className="inline-flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#a37c4c] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-6 py-3.5 transition-all duration-200 shadow-sm border border-zinc-200 hover:border-transparent cursor-pointer"
+              >
+                <span>BOOK YOUR SLOT</span>
+                <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -102,9 +111,18 @@ export default function SpaWellnessPage() {
             <p className="spa-salon-card-desc">
               Immerse yourself in authentic Ayurvedic therapies, holistic healing, and transformative wellness rituals at Rejou – The Healing Spa. Our skilled therapists combine ancient herbal remedies, warm essential oils, and therapeutic massages including Shirodhara, Abhyanga, and natural botanical body wraps to restore complete balance and vitality.
             </p>
-            <Link to="/contact" className="spa-salon-view-btn">
-              VIEW
-            </Link>
+            <div className="flex items-center gap-3 pt-2">
+              <Link to="/contact" className="spa-salon-view-btn">
+                VIEW
+              </Link>
+              <a
+                href="tel:9828885481"
+                className="inline-flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#a37c4c] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-6 py-3.5 transition-all duration-200 shadow-sm border border-zinc-200 hover:border-transparent cursor-pointer"
+              >
+                <span>BOOK YOUR SLOT</span>
+                <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -157,18 +175,18 @@ export default function SpaWellnessPage() {
               </div>
 
               <div className="pt-4 border-t border-border/40 flex items-center justify-between">
-                <Link
-                  to="/contact"
+                <a
+                  href="tel:9828885481"
                   className="text-xs uppercase tracking-widest text-primary font-semibold hover:underline inline-flex items-center gap-1.5"
                 >
-                  Book Treatment <ArrowUpRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="gold-button !text-xs !py-2 !px-4"
+                  <span>Book Your Slot</span> <Phone className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href="tel:9828885481"
+                  className="gold-button !text-xs !py-2 !px-4 inline-flex items-center gap-1.5"
                 >
-                  Consult Specialist
-                </Link>
+                  <span>CALL US</span>
+                </a>
               </div>
             </article>
           ))}
@@ -210,9 +228,9 @@ export default function SpaWellnessPage() {
           <em>Rejuvenation Journeys</em>
         </h2>
         <p>Step away from daily demands and immerse yourself in all-inclusive detox, yoga, and wellness packages.</p>
-        <Link to="/contact">
-          Explore Retreat Packages <ArrowUpRight />
-        </Link>
+        <a href="tel:9828885481" className="inline-flex items-center gap-2">
+          <span>BOOK YOUR RETREAT</span> <ArrowUpRight className="w-4 h-4" />
+        </a>
       </section>
     </>
   );

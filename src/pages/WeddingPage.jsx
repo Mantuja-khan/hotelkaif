@@ -476,12 +476,18 @@ export default function WeddingPage() {
               ))}
             </div>
 
-            <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="tel:9828885481"
+                className="inline-flex items-center justify-center bg-[#a37c4c] hover:bg-[#8b6537] text-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all shadow-sm cursor-pointer"
+              >
+                <span>BOOK WEDDING</span> <ArrowUpRight className="w-4 h-4 ml-2" />
+              </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center bg-[#a37c4c] hover:bg-[#8b6537] text-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all shadow-sm"
+                className="inline-flex items-center justify-center bg-[#1a1a1a] hover:bg-[#a37c4c] text-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all shadow-sm"
               >
-                PLAN YOUR WEDDING <ArrowUpRight className="w-4 h-4 ml-2" />
+                ENQUIRE ONLINE
               </Link>
             </div>
           </div>
@@ -497,9 +503,9 @@ export default function WeddingPage() {
           <em>Concierge Today</em>
         </h2>
         <p>Let our specialists help you design a bespoke wedding package tailored to your traditions, date, and guest count.</p>
-        <Link to="/contact">
-          Schedule Consultation <ArrowUpRight />
-        </Link>
+        <a href="tel:9828885481" className="inline-flex items-center gap-2 cursor-pointer">
+          <span>CALL WEDDING CONCIERGE</span> <ArrowUpRight className="w-4 h-4" />
+        </a>
       </section>
     </>
   );

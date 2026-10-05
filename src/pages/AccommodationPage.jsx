@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, X, Sparkles, Check, ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Sparkles, Check, ArrowUpRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/arcova";
 
 // 1. Deluxe Rooms
@@ -238,7 +238,7 @@ export const roomData = [
   }
 ];
 
-function RoomImageSlider({ images, roomName }) {
+function RoomImageSlider({ images, roomName, isModal = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = (e) => {
@@ -252,7 +252,7 @@ function RoomImageSlider({ images, roomName }) {
   };
 
   return (
-    <div className="room-slider-wrapper relative w-full h-full min-h-[22rem] sm:min-h-[26rem] lg:min-h-[28rem] overflow-hidden bg-[#111]">
+    <div className={`room-slider-wrapper relative w-full h-full ${isModal ? "h-60 sm:h-72 md:h-80 min-h-0" : "min-h-[22rem] sm:min-h-[26rem] lg:min-h-[28rem]"} overflow-hidden bg-[#111]`}>
       <img
         src={images[currentIndex]}
         alt={`${roomName} - View ${currentIndex + 1}`}
@@ -267,7 +267,7 @@ function RoomImageSlider({ images, roomName }) {
             type="button"
             onClick={prevSlide}
             aria-label="Previous photo"
-            className="room-nav-arrow room-nav-prev absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/90 hover:text-white bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full transition-all duration-200 focus:outline-none"
+            className="room-nav-arrow room-nav-prev absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/90 hover:text-white bg-black/30 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all duration-200 focus:outline-none z-20 cursor-pointer"
           >
             <ChevronLeft className="w-7 h-7" />
           </button>
@@ -275,7 +275,7 @@ function RoomImageSlider({ images, roomName }) {
             type="button"
             onClick={nextSlide}
             aria-label="Next photo"
-            className="room-nav-arrow room-nav-next absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/90 hover:text-white bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full transition-all duration-200 focus:outline-none"
+            className="room-nav-arrow room-nav-next absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/90 hover:text-white bg-black/30 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all duration-200 focus:outline-none z-20 cursor-pointer"
           >
             <ChevronRight className="w-7 h-7" />
           </button>
@@ -284,7 +284,7 @@ function RoomImageSlider({ images, roomName }) {
 
       {/* Pagination Dots */}
       {images.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
           {images.map((_, idx) => (
             <button
               key={idx}
@@ -294,9 +294,9 @@ function RoomImageSlider({ images, roomName }) {
                 setCurrentIndex(idx);
               }}
               aria-label={`Slide ${idx + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                 idx === currentIndex
-                  ? "bg-white scale-125"
+                  ? "bg-white scale-125 shadow-sm"
                   : "bg-white/45 hover:bg-white/75"
               }`}
             />
@@ -307,59 +307,61 @@ function RoomImageSlider({ images, roomName }) {
   );
 }
 
-// Room Details Modal
+// Room Details Modal - with proper scrollable layout & visible content
 function RoomModal({ room, onClose }) {
   if (!room) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fadeIn"
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn"
       onClick={onClose}
     >
       <div
-        className="bg-white text-zinc-900 w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden my-auto relative"
+        className="bg-white text-zinc-900 w-full max-w-4xl max-h-[92vh] flex flex-col rounded-sm shadow-2xl overflow-hidden relative my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors"
+          className="absolute top-3 right-3 z-30 w-10 h-10 bg-black/60 hover:bg-black/85 text-white rounded-full flex items-center justify-center transition-colors shadow-md cursor-pointer"
           aria-label="Close details"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="h-72 sm:h-96 w-full">
-          <RoomImageSlider images={room.images} roomName={room.name} />
+        {/* Modal Image Slider Header */}
+        <div className="h-60 sm:h-72 md:h-80 w-full shrink-0 relative bg-stone-900">
+          <RoomImageSlider images={room.images} roomName={room.name} isModal={true} />
         </div>
 
-        <div className="p-6 sm:p-10">
-          <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-zinc-200 pb-4 mb-6">
+        {/* Modal Scrollable Content */}
+        <div className="overflow-y-auto flex-1 p-6 sm:p-8 space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 pb-5">
             <div>
-              <h2 className="text-3xl font-serif text-zinc-900">{room.name}</h2>
-              <div className="flex items-center gap-6 mt-3 text-sm text-zinc-600">
-                <span className="flex items-center gap-2">
+              <h2 className="text-2xl sm:text-3xl font-serif text-zinc-900 font-normal">{room.name}</h2>
+              <div className="flex items-center gap-6 mt-2 text-xs sm:text-sm text-zinc-600">
+                <span className="flex items-center gap-1.5">
                   <strong>Capacity:</strong> {room.capacityText} Guests
                 </span>
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5">
                   <strong>Room Size:</strong> {room.area}
                 </span>
               </div>
             </div>
-            <Link
-              to="/contact"
-              className="gold-button !text-xs !py-3 !px-6"
-              onClick={onClose}
+            <a
+              href="tel:9828885481"
+              className="gold-button !text-xs !py-3 !px-6 inline-flex items-center gap-2 shadow-md cursor-pointer"
             >
-              Book This Room <ArrowUpRight className="w-4 h-4" />
-            </Link>
+              <span>BOOK NOW</span>
+              <Phone className="w-4 h-4" />
+            </a>
           </div>
 
-          <p className="text-zinc-700 text-sm sm:text-base leading-relaxed mb-8">
+          <p className="text-zinc-700 text-sm sm:text-base leading-relaxed font-light">
             {room.description}
           </p>
 
           <div>
-            <h4 className="font-serif text-xl text-zinc-900 mb-4 flex items-center gap-2">
+            <h4 className="font-serif text-lg sm:text-xl text-zinc-900 mb-4 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[#a37c4c]" />
               Room Highlights &amp; Inclusions
             </h4>
@@ -371,6 +373,29 @@ function RoomModal({ room, onClose }) {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Modal Footer Bar */}
+        <div className="border-t border-zinc-200 bg-stone-50 px-6 py-4 flex items-center justify-between gap-4 shrink-0">
+          <span className="text-xs text-stone-500 font-medium hidden sm:inline-block">
+            Best rates &amp; instant assistance via direct phone reservation
+          </span>
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-5 py-2.5 border border-zinc-300 hover:bg-stone-200 text-stone-700 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              CLOSE
+            </button>
+            <a
+              href="tel:9828885481"
+              className="gold-button !text-xs !py-2.5 !px-6 inline-flex items-center gap-2 shadow-sm cursor-pointer"
+            >
+              <span>BOOK NOW</span>
+              <Phone className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
       </div>
@@ -491,15 +516,22 @@ export default function AccommodationPage() {
                       </div>
                     </div>
 
-                    {/* View Button */}
-                    <div className="pt-2">
+                    {/* View & Book Now Buttons */}
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
                       <button
                         type="button"
                         onClick={() => setSelectedRoom(room)}
-                        className="room-view-btn inline-block bg-[#a37c4c] hover:bg-[#8b6537] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-8 py-3.5 transition-all duration-200 focus:outline-none shadow-sm cursor-pointer"
+                        className="room-view-btn inline-block bg-[#a37c4c] hover:bg-[#8b6537] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-7 py-3.5 transition-all duration-200 focus:outline-none shadow-sm cursor-pointer"
                       >
                         VIEW
                       </button>
+                      <a
+                        href="tel:9828885481"
+                        className="inline-flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#a37c4c] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-6 py-3.5 transition-all duration-200 shadow-sm border border-zinc-200 hover:border-transparent cursor-pointer"
+                      >
+                        <span>BOOK NOW</span>
+                        <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -537,18 +569,19 @@ export default function AccommodationPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <Link
-              to="/contact"
+            <a
+              href="tel:9828885481"
               className="w-full sm:w-auto bg-[#a37c4c] hover:bg-[#8b6537] text-white text-xs font-medium uppercase tracking-[0.2em] px-8 py-4 transition-all duration-200 shadow-lg inline-flex items-center justify-center gap-2"
             >
-              <span>Book Your Stay</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+              <span>BOOK YOUR STAY</span>
+              <Phone className="w-4 h-4" />
+            </a>
             <a
-              href="tel:+912692239268"
+              href="tel:9828885481"
               className="w-full sm:w-auto border border-[#c5a880]/60 hover:bg-[#c5a880]/10 text-white text-xs font-medium uppercase tracking-[0.2em] px-8 py-4 transition-all duration-200 inline-flex items-center justify-center gap-2"
             >
-              <span>Call Concierge: +91 2692 239 268</span>
+              <span>CALL CONCIERGE</span>
+              <Phone className="w-4 h-4 text-[#c5a880]" />
             </a>
           </div>
         </div>

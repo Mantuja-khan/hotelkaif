@@ -172,9 +172,13 @@ export function SiteHeader() {
         </Link>
       </nav>
 
-      <Button asChild variant="outline" className="header-cta book-now-blink">
-        <Link to="/contact">BOOK NOW</Link>
-      </Button>
+      <a
+        href="tel:9828885481"
+        className="header-cta book-now-blink"
+        aria-label="Book Now"
+      >
+        BOOK NOW
+      </a>
 
       <Button
         variant="ghost"
@@ -232,13 +236,14 @@ export function SiteHeader() {
           </div>
 
           <Link to="/contact" onClick={() => setOpen(false)}>Contact <ArrowUpRight /></Link>
-          <Link
-            to="/contact"
+          <a
+            href="tel:9828885481"
             onClick={() => setOpen(false)}
-            className="gold-button book-now-blink text-center mt-4 py-3 !text-sm !font-bold"
+            className="gold-button book-now-blink text-center mt-4 py-3 !text-sm !font-bold flex items-center justify-center gap-1.5"
+            aria-label="Book Now"
           >
             BOOK NOW <ArrowUpRight className="inline-block ml-1 w-4 h-4" />
-          </Link>
+          </a>
         </nav>
       )}
     </header>
@@ -271,8 +276,8 @@ export function SiteFooter() {
           <div className="space-y-1.5 mb-6">
             <p className="text-xs text-[#c2d3cb] flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-[#a37c4c]" />
-              <a href="tel:9828995481" className="hover:text-white transition-colors font-medium">
-                +91 98289 95481
+              <a href="tel:9828885481" className="hover:text-white transition-colors font-medium">
+                Call for Reservations
               </a>
             </p>
             <p className="text-xs text-[#c2d3cb] flex items-center gap-2">
@@ -429,7 +434,15 @@ export function SiteFooter() {
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 mt-12 pt-6 border-t border-emerald-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-emerald-300/60">
         <span>© {new Date().getFullYear()} Madhubhan Resort &amp; Spa. All rights reserved.</span>
-        <span>Privacy Policy &nbsp;&nbsp;|&nbsp;&nbsp; Terms &amp; Conditions</span>
+        <span>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors underline underline-offset-4">
+            Privacy Policy
+          </Link>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <Link to="/terms-and-conditions" className="hover:text-white transition-colors underline underline-offset-4">
+            Terms &amp; Conditions
+          </Link>
+        </span>
       </div>
     </footer>
   );

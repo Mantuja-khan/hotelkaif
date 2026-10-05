@@ -294,12 +294,20 @@ export function HomeRoomsSection() {
                     Area: {currentRoom.area}
                   </p>
                 </div>
-                <Link
-                  to="/accommodation"
-                  className="bg-[#a37c4c] hover:bg-[#8b6537] text-white px-5 sm:px-7 py-2.5 sm:py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all shrink-0 inline-flex items-center justify-center shadow-xs"
-                >
-                  VIEW
-                </Link>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    to="/accommodation"
+                    className="bg-[#a37c4c] hover:bg-[#8b6537] text-white px-4 sm:px-6 py-2.5 sm:py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center shadow-xs"
+                  >
+                    VIEW
+                  </Link>
+                  <a
+                    href="tel:9828885481"
+                    className="bg-[#1a1a1a] hover:bg-[#a37c4c] text-white px-3.5 sm:px-5 py-2.5 sm:py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center shadow-xs"
+                  >
+                    BOOK NOW
+                  </a>
+                </div>
               </div>
             </div>
           </div>

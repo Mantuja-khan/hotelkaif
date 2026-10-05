@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Clock, Sparkles, X, Check } from "lucide-react";
+import { ArrowUpRight, Clock, Sparkles, X, Check, Phone } from "lucide-react";
 
 // 7 Cuisine Images from assets
 import banyanTreeImg from "@/assets/the-banyan-tree-thumb-1.webp";
@@ -169,13 +169,13 @@ function DiningModal({ venue, onClose }) {
               <Clock className="w-4 h-4 text-[#a37c4c]" />
               <span><strong>Timings:</strong> {venue.timings}</span>
             </div>
-            <Link
-              to="/contact"
-              className="gold-button !text-xs !py-2.5 !px-5"
-              onClick={onClose}
+            <a
+              href="tel:9828885481"
+              className="gold-button !text-xs !py-2.5 !px-5 inline-flex items-center gap-2 cursor-pointer shadow-sm"
             >
-              Reserve a Table <ArrowUpRight className="w-4 h-4" />
-            </Link>
+              <span>BOOK A TABLE</span>
+              <Phone className="w-3.5 h-3.5" />
+            </a>
           </div>
 
           <p className="text-zinc-700 text-sm sm:text-base leading-relaxed mb-6 font-light">
@@ -299,14 +299,21 @@ export default function CuisinePage() {
                       </div>
                     </div>
 
-                    <div>
+                    <div className="flex flex-wrap items-center gap-3">
                       <button
                         type="button"
                         onClick={() => setSelectedVenue(outlet)}
-                        className="inline-block bg-[#a37c4c] hover:bg-[#8b6537] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-8 py-3.5 transition-all duration-200 focus:outline-none shadow-sm cursor-pointer"
+                        className="inline-block bg-[#a37c4c] hover:bg-[#8b6537] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-7 py-3.5 transition-all duration-200 focus:outline-none shadow-sm cursor-pointer"
                       >
                         VIEW
                       </button>
+                      <a
+                        href="tel:9828885481"
+                        className="inline-flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#a37c4c] text-white text-[0.72rem] font-medium tracking-[0.18em] uppercase px-6 py-3.5 transition-all duration-200 shadow-sm border border-zinc-200 hover:border-transparent cursor-pointer"
+                      >
+                        <span>BOOK A TABLE</span>
+                        <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -345,13 +352,13 @@ export default function CuisinePage() {
           <p className="text-zinc-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-8 font-light">
             Celebrate birthdays, anniversaries, and precious milestones with a customized 5-course chef menu, personal butler, and starlit floral setup.
           </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 bg-[#a37c4c] hover:bg-[#8b6537] text-white text-xs font-medium uppercase tracking-[0.2em] px-8 py-4 transition-all duration-200 shadow-lg"
+          <a
+            href="tel:9828885481"
+            className="inline-flex items-center gap-2 bg-[#a37c4c] hover:bg-[#8b6537] text-white text-xs font-medium uppercase tracking-[0.2em] px-8 py-4 transition-all duration-200 shadow-lg cursor-pointer"
           >
-            <span>Reserve Private Dining</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
+            <span>BOOK A TABLE</span>
+            <Phone className="w-4 h-4 ml-1" />
+          </a>
         </div>
       </section>
     </>
